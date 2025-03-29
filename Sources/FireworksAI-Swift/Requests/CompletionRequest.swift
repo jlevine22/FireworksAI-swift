@@ -88,7 +88,7 @@ extension CompletionRequest {
         public var id: String
         public var model: String
         public var object: String
-        public var usage: Usage
+        public var usage: LLMUsage
     }
     
     public struct Choice: Codable, Sendable {
