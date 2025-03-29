@@ -1,5 +1,7 @@
 # FireworksAI Swift
 
+An API client for [Fireworks.ai](https://fireworks.ai) written in Swift.
+
 ## Basic Usage
 
 ```swift
