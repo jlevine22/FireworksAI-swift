@@ -4,21 +4,28 @@
 import PackageDescription
 
 let package = Package(
-    name: "FireworksAI-Swift",
+    name: "FireworksAI",
+    platforms: [
+        .iOS(.v18),
+        .macOS(.v15),
+        .visionOS(.v2),
+        .watchOS(.v10),
+        .tvOS(.v17)
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "FireworksAI-Swift",
-            targets: ["FireworksAI-Swift"]),
+            name: "FireworksAI",
+            targets: ["FireworksAI"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "FireworksAI-Swift"),
+            name: "FireworksAI"),
         .testTarget(
-            name: "FireworksAI-SwiftTests",
-            dependencies: ["FireworksAI-Swift"]
+            name: "FireworksAITests",
+            dependencies: ["FireworksAI"]
         ),
     ]
 )
