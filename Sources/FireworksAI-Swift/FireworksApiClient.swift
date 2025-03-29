@@ -21,7 +21,7 @@ public struct FireworksApiClient: Sendable {
     
     public func request<T: FireworksApiRequest>(_ request: T) async throws -> T.Response {
         guard let apiKey else {
-            throw ApiClientError.missingApiKey
+            throw FireworksApiClientError.missingApiKey
         }
         let url = BASE_URL.appendingPathComponent(request.path)
         var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
@@ -35,29 +35,3 @@ public struct FireworksApiClient: Sendable {
         return try JSONDecoder().decode(T.Response.self, from: data)
     }
 }
-
-enum ApiClientError: Error {
-    case missingApiKey
-}
-
-public protocol FireworksApiRequest: Codable {
-    associatedtype Response: Codable, Sendable
-    
-    var path: String { get }
-    var method: String { get }
-}
-
-#if canImport(SwiftUI)
-import SwiftUI
-
-public struct ClientKey: EnvironmentKey {
-    public static let defaultValue: FireworksApiClient = .init(apiKey: nil)
-}
-
-extension EnvironmentValues {
-    public var fireworksApiClient: FireworksApiClient {
-        get { self[ClientKey.self] }
-        set { self[ClientKey.self] = newValue }
-    }
-}
-#endif

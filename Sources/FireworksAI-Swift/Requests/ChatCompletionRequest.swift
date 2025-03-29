@@ -15,7 +15,7 @@ public struct ChatCompletionRequest: Codable, FireworksApiRequest {
     
     // Public initializer
     public init(
-        messages: [FireworksAIMessage],
+        messages: [Message],
         model: String,
         context_length_exceeded_behavior: ContextLengthExceededBehavior = .error,
         frequency_penalty: Double? = nil,
@@ -59,7 +59,7 @@ public struct ChatCompletionRequest: Codable, FireworksApiRequest {
     }
     
     // Required fields
-    public var messages: [FireworksAIMessage]
+    public var messages: [Message]
     public var model: String
     
     // Context behavior
@@ -97,35 +97,6 @@ public struct ChatCompletionRequest: Codable, FireworksApiRequest {
     public var user: String? = nil
 }
 
-// MARK: - Message
-
-public struct FireworksAIMessage: Codable, Sendable {
-    public var content: String?
-    public var role: FireworksAIRole
-    public var name: String?
-    
-    public init(content: String? = nil, role: FireworksAIRole, name: String? = nil) {
-        self.content = content
-        self.role = role
-        self.name = name
-    }
-}
-
-public enum FireworksAIRole: String, Codable, Sendable {
-    case system, user, assistant
-}
-
-// MARK: - Tool
-
-public struct Tool: Codable {
-    /// The name of the tool/function.
-    public var name: String
-    /// A description of what the tool does.
-    public var description: String?
-    /// The parameters schema for the tool, represented as arbitrary JSON.
-    public var parameters: [String: JSONValue]? = nil
-}
-
 extension ChatCompletionRequest {
     public struct Response: Codable, Sendable {
         public var choices: [Choice]
@@ -139,6 +110,6 @@ extension ChatCompletionRequest {
     public struct Choice: Codable, Sendable {
         public var finish_reason: FinishReason
         public var index: Int
-        public var message: FireworksAIMessage
+        public var message: Message
     }
 }
