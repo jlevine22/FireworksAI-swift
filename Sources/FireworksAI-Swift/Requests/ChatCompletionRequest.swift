@@ -10,7 +10,7 @@ import Foundation
 
 public struct ChatCompletionRequest: Codable, FireworksApiRequest {
     // FireworksApiRequest protocol requirements
-    public var path: String { "chat/completions" }
+    public var path: String { "inference/v1/chat/completions" }
     public var method: String { "POST" }
     
     // Public initializer

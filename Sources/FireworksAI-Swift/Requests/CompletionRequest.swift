@@ -8,7 +8,7 @@
 import Foundation
 
 public struct CompletionRequest: Codable, FireworksApiRequest {
-    public var path: String { "completions" }
+    public var path: String { "inference/v1/completions" }
     public var method: String { "POST" }
     
     public var model: String

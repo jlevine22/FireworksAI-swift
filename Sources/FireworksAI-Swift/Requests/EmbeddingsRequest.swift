@@ -8,7 +8,7 @@
 import Foundation
 
 public struct EmbeddingsRequest: Codable, FireworksApiRequest {
-    public var path: String { "embeddings" }
+    public var path: String { "infercnece/v1/embeddings" }
     public var method: String { "POST" }
     
     public var input: String

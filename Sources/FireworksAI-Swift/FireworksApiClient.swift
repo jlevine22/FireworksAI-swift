@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-private let BASE_URL = URL(string: "https://api.fireworks.ai/inference/v1/")!
+private let BASE_URL = URL(string: "https://api.fireworks.ai/")!
 
 public struct FireworksApiClient: Sendable {
     private let apiKey: String?
@@ -23,7 +23,10 @@ public struct FireworksApiClient: Sendable {
         guard let apiKey else {
             throw FireworksApiClientError.missingApiKey
         }
-        let url = BASE_URL.appendingPathComponent(request.path)
+        var url = BASE_URL.appendingPathComponent(request.path)
+        if let queryItems = request.queryItems {
+            url = url.appending(queryItems: queryItems)
+        }
         var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
         urlRequest.httpMethod = request.method
         urlRequest.allHTTPHeaderFields = [
